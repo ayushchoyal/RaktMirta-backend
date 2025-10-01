@@ -1,6 +1,6 @@
 package com.raktmitra.RaktMitra.controller;
 
-import com.raktmitra.RaktMitra.entity.Donar;
+import com.raktmitra.RaktMitra.entity.Donor;
 import com.raktmitra.RaktMitra.repository.DonorRepository;
 import com.raktmitra.RaktMitra.services.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +21,11 @@ public class DonorController {
     }
 
     @GetMapping("/donor")
-    public List<Donar> getAllDonors() {
+    public List<Donor> getAllDonors() {
         return donorService.getAllDonors();
     }
     @GetMapping("/donor/{id}")
-    public ResponseEntity<Donar>getDonarById(@PathVariable Long id){
+    public ResponseEntity<Donor>getDonarById(@PathVariable Long id){
         return donorService.getDonorById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

@@ -1,6 +1,6 @@
 package com.raktmitra.RaktMitra.services;
 
-import com.raktmitra.RaktMitra.entity.Donar;
+import com.raktmitra.RaktMitra.entity.Donor;
 import com.raktmitra.RaktMitra.repository.DonorRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +16,11 @@ public class DonorService {
         this.donorRepository = donorRepository;
     }
 
-    public List<Donar> getAllDonors() {
+    public List<Donor> getAllDonors() {
         return donorRepository.findAll();
     }
 
-    public Optional<Donar> getDonorById(Long id) {
+    public Optional<Donor> getDonorById(Long id) {
         return donorRepository.findById(id);
     }
 }
