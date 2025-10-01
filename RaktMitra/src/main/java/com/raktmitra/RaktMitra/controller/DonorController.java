@@ -6,6 +6,7 @@ import com.raktmitra.RaktMitra.services.DonorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +20,19 @@ public class DonorController {
     public DonorController(DonorService donorService) {
         this.donorService = donorService;
     }
+
+    @PostMapping("register")
+    public ResponseEntity<?>registerDonor(@RequestPart("donor") Donor donor,
+                                          @RequestPart(value="image",required = false) MultipartFile imageFile){
+        try{
+            Donor saved = donorService.registerDonor(donor,imageFile);
+            return ResponseEntity.ok(saved);
+        }catch(Exception e){
+            return ResponseEntity.status(500).body("Error: "+ e.getMessage());
+        }
+    }
+
+
 
     @GetMapping("/donor")
     public List<Donor> getAllDonors() {
