@@ -1,17 +1,23 @@
 package com.raktmitra.RaktMitra.controller;
 
-import com.raktmitra.RaktMitra.entity.Donor;
-import com.raktmitra.RaktMitra.repository.DonorRepository;
-import com.raktmitra.RaktMitra.services.DonorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.raktmitra.RaktMitra.entity.Donor;
+import com.raktmitra.RaktMitra.services.DonorService;
+
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/user/donor")
 @CrossOrigin (origins = "http://localhost:5173")
 public class DonorController {
     @Autowired
