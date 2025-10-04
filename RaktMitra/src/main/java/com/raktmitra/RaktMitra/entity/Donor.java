@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
+
 @Entity
 @Table(name="donors")
 public class Donor {
@@ -45,7 +45,7 @@ public class Donor {
     private String recentIllness;
     private String pregnancyStatus;
     private String smokingStatus;
-    private String alcholConsumption;
+    private String alcoholConsumption;
 
     //Consent
     private boolean consentToContact;
@@ -232,12 +232,12 @@ public class Donor {
         this.smokingStatus = smokingStatus;
     }
 
-    public String getAlcholConsumption() {
-        return alcholConsumption;
+    public String getAlcoholConsumption() {
+        return alcoholConsumption;
     }
 
-    public void setAlcholConsumption(String alcholConsumption) {
-        this.alcholConsumption = alcholConsumption;
+    public void setAlcoholConsumption(String alcholConsumption) {
+        this.alcoholConsumption = alcholConsumption;
     }
 
     public boolean isConsentToContact() {

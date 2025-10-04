@@ -17,7 +17,7 @@ import com.raktmitra.RaktMitra.entity.Donor;
 import com.raktmitra.RaktMitra.services.DonorService;
 
 @RestController
-@RequestMapping("/user/donor")
+@RequestMapping("/user")
 @CrossOrigin (origins = "http://localhost:5173")
 public class DonorController {
     @Autowired
@@ -27,7 +27,7 @@ public class DonorController {
         this.donorService = donorService;
     }
 
-    @PostMapping("register")
+    @PostMapping("/donor/register")
     public ResponseEntity<?>registerDonor(@RequestPart("donor") Donor donor,
                                           @RequestPart(value="image",required = false) MultipartFile imageFile){
         try{
@@ -44,6 +44,8 @@ public class DonorController {
     public List<Donor> getAllDonors() {
         return donorService.getAllDonors();
     }
+
+
     @GetMapping("/donor/{id}")
     public ResponseEntity<Donor>getDonarById(@PathVariable Long id){
         return donorService.getDonorById(id)
