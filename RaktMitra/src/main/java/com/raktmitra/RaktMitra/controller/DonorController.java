@@ -27,7 +27,7 @@ public class DonorController {
         this.donorService = donorService;
     }
 
-    @PostMapping("/donor/register")
+    @PostMapping("/register")
     public ResponseEntity<?>registerDonor(@RequestPart("donor") Donor donor,
                                           @RequestPart(value="image",required = false) MultipartFile imageFile){
         try{

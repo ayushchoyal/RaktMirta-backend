@@ -1,5 +1,6 @@
 package com.raktmitra.RaktMitra.controller;
 
+import com.raktmitra.RaktMitra.dto.UserDto;
 import com.raktmitra.RaktMitra.entity.User;
 import com.raktmitra.RaktMitra.repository.UserRepo;
 import com.raktmitra.RaktMitra.services.UserService;
@@ -7,6 +8,8 @@ import com.raktmitra.RaktMitra.config.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +59,7 @@ public class UserController {
                             "id", user.getId(),
                             "name", user.getUsername(),
                             "email", user.getEmail(),
+                            "phone", user.getPhone(),
                             "role", user.getRole()
                     )
             );
@@ -65,4 +69,23 @@ public class UserController {
                     .body(Map.of("success", false, "message", "Invalid email or password"));
         }
     }
+    @GetMapping("/user/details")
+    public ResponseEntity<UserDto> getUserDetails(@AuthenticationPrincipal UserDetails userDetails) {
+        User user = userService.findByEmail(userDetails.getUsername());
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        UserDto dto = new UserDto(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getRole()
+        );
+
+        return ResponseEntity.ok(dto);
+    }
+
 }
