@@ -45,4 +45,9 @@ public class DonorService {
     public Optional<Donor> getDonorById(Long id) {
         return donorRepository.findById(id);
     }
+
+    public Donor getDonorDetails(String email){
+        return donorRepository.findByEmail(email);
+    }
+
 }

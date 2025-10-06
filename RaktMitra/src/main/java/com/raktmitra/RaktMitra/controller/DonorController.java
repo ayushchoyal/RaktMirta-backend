@@ -2,6 +2,9 @@ package com.raktmitra.RaktMitra.controller;
 
 import java.util.List;
 
+import com.raktmitra.RaktMitra.dto.DonorDto;
+import com.raktmitra.RaktMitra.repository.DonorRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +24,6 @@ import com.raktmitra.RaktMitra.services.DonorService;
 @CrossOrigin (origins = "http://localhost:5173")
 public class DonorController {
     @Autowired
-
     private final DonorService donorService;
     public DonorController(DonorService donorService) {
         this.donorService = donorService;
@@ -32,7 +34,10 @@ public class DonorController {
                                           @RequestPart(value="image",required = false) MultipartFile imageFile){
         try{
             Donor saved = donorService.registerDonor(donor,imageFile);
-            return ResponseEntity.ok(saved);
+            //return ResponseEntity.ok(saved);
+            DonorDto responseDto = new DonorDto();
+            BeanUtils.copyProperties(saved, responseDto);
+            return ResponseEntity.ok(responseDto);
         }catch(Exception e){
             return ResponseEntity.status(500).body("Error: "+ e.getMessage());
         }
@@ -52,5 +57,19 @@ public class DonorController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+
+    @GetMapping("/donor/{email}")
+    public ResponseEntity<DonorDto> getDonorByEmail(@PathVariable String email) {
+        Donor donor = donorService.getDonorDetails(email);
+        if (donor == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        DonorDto dto = new DonorDto();
+        BeanUtils.copyProperties(donor, dto);
+        return ResponseEntity.ok(dto);
+    }
+
 
 }
