@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+
 @CrossOrigin(origins = "http://localhost:5173")
 public class BankController {
     private final BankService bankService;
@@ -17,14 +17,18 @@ public class BankController {
         this.bankService=bankService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public ResponseEntity<Bank>addBank(@RequestBody Bank bank){
         Bank savedBank= bankService.saveBank(bank);
         return ResponseEntity.ok(savedBank);
     }
 
-    @GetMapping("/banks")
+    @GetMapping("/admin/banks")
     public ResponseEntity<List<Bank>>getBanks(){
+        return ResponseEntity.ok(bankService.getAllBanks());
+    }
+    @GetMapping("/banks")
+    public ResponseEntity<List<Bank>>getAllBanks(){
         return ResponseEntity.ok(bankService.getAllBanks());
     }
 }

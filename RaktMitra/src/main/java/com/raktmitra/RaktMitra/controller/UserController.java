@@ -1,8 +1,10 @@
 package com.raktmitra.RaktMitra.controller;
 
 import com.raktmitra.RaktMitra.dto.UserDto;
+import com.raktmitra.RaktMitra.entity.Bank;
 import com.raktmitra.RaktMitra.entity.User;
 import com.raktmitra.RaktMitra.repository.UserRepo;
+import com.raktmitra.RaktMitra.services.BankService;
 import com.raktmitra.RaktMitra.services.UserService;
 import com.raktmitra.RaktMitra.config.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,11 @@ public class UserController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
@@ -87,5 +94,6 @@ public class UserController {
 
         return ResponseEntity.ok(dto);
     }
+
 
 }
