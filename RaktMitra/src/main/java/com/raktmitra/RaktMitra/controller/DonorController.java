@@ -59,17 +59,17 @@ public class DonorController {
     }
 
 
-    @GetMapping("/donor/{email}")
-    public ResponseEntity<DonorDto> getDonorByEmail(@PathVariable String email) {
-        Donor donor = donorService.getDonorDetails(email);
-        if (donor == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        DonorDto dto = new DonorDto();
-        BeanUtils.copyProperties(donor, dto);
-        return ResponseEntity.ok(dto);
-    }
+//    @GetMapping("/donor/{email}")
+//    public ResponseEntity<DonorDto> getDonorByEmail(@PathVariable String email) {
+//        Donor donor = donorService.getDonorDetails(email);
+//        if (donor == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        DonorDto dto = new DonorDto();
+//        BeanUtils.copyProperties(donor, dto);
+//        return ResponseEntity.ok(dto);
+//    }
 
 
 }
