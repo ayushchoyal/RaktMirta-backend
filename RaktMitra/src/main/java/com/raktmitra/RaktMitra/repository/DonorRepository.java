@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.raktmitra.RaktMitra.entity.Donor;
 
+import java.util.Optional;
+
 public interface DonorRepository extends JpaRepository<Donor,Long> {
-    Donor findByEmail(String email);
+    Optional<Donor> findByEmail(String email);
 }

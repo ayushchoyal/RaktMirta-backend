@@ -2,38 +2,32 @@ package com.raktmitra.RaktMitra.services;
 
 import com.raktmitra.RaktMitra.entity.Donor;
 import com.raktmitra.RaktMitra.repository.DonorRepository;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class DonorService {
 
-    @Value("${file.upload-dir}")
-    private String uploadDir;
-    private final DonorRepository donorRepository;
+    @Autowired
+    private DonorRepository donorRepository;
 
-    public DonorService(DonorRepository donorRepository)
-    {
-        this.donorRepository = donorRepository;
-    }
-
-    public Donor registerDonor(Donor donor, MultipartFile imageFile) throws IOException{
-        if(imageFile != null && !imageFile.isEmpty()){
-            String fileName = UUID.randomUUID() + "_"+imageFile.getOriginalFilename();
-            String filePath = uploadDir+ File.separator+fileName;
-            File dir = new File(uploadDir);
-            if(!dir.exists()){
-                dir.mkdirs();
-            }
-            imageFile.transferTo(new File(filePath));
-            donor.setImageUrl(fileName);
+    public Donor registerDonor(Donor donor) {
+        // If already registered, update existing donor
+        Optional<Donor> existing = donorRepository.findByEmail(donor.getEmail());
+        if (existing.isPresent()) {
+            Donor existingDonor = existing.get();
+            existingDonor.setAddress(donor.getAddress());
+            existingDonor.setDob(donor.getDob());
+            existingDonor.setGender(donor.getGender());
+            existingDonor.setWeight(donor.getWeight());
+            existingDonor.setBloodGroup(donor.getBloodGroup());
+            existingDonor.setFoodPreference(donor.getFoodPreference());
+            existingDonor.setSmokingStatus(donor.getSmokingStatus());
+            existingDonor.setAlcoholConsumption(donor.getAlcoholConsumption());
+            return donorRepository.save(existingDonor);
         }
         return donorRepository.save(donor);
     }
@@ -45,9 +39,4 @@ public class DonorService {
     public Optional<Donor> getDonorById(Long id) {
         return donorRepository.findById(id);
     }
-
-    public Donor getDonorDetails(String email){
-        return donorRepository.findByEmail(email);
-    }
-
 }
