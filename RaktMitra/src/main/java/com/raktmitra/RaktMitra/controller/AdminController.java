@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://rakt-mitra-blood-donation.vercel.app"
+}, allowCredentials = "true")
 public class AdminController {
     private final AdminService adminService;
 

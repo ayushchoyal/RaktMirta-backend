@@ -15,7 +15,10 @@ import com.raktmitra.RaktMitra.services.DonorService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin (origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://rakt-mitra-blood-donation.vercel.app"
+}, allowCredentials = "true")
 public class DonorController {
     @Autowired
     private final DonorService donorService;

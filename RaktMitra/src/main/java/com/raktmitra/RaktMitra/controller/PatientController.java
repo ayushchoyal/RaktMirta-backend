@@ -10,7 +10,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+        "http://localhost:5173",
+        "https://rakt-mitra-blood-donation.vercel.app"
+}, allowCredentials = "true")
 public class PatientController {
 
     private final PatientService patientService;
