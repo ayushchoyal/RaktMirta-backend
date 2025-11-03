@@ -22,5 +22,10 @@ public class BankService {
     }
 
 
-
+    public void deleteBank(Long id) {
+        if (!bankRepo.existsById(id)) {
+            throw new RuntimeException("Blood bank not found with ID: " + id);
+        }
+        bankRepo.deleteById(id);
+    }
 }

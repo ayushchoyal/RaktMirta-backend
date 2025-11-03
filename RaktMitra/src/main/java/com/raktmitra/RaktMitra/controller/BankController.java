@@ -31,4 +31,17 @@ public class BankController {
     public ResponseEntity<List<Bank>>getAllBanks(){
         return ResponseEntity.ok(bankService.getAllBanks());
     }
+
+    @DeleteMapping("admin/delete/{id}")
+    public ResponseEntity<String> deleteBank(@PathVariable Long id) {
+        try {
+            bankService.deleteBank(id);
+            return ResponseEntity.ok("Bank deleted successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Internal Server Error");
+        }
+    }
+
 }
