@@ -15,7 +15,6 @@ public class DonorService {
     private DonorRepository donorRepository;
 
     public Donor registerDonor(Donor donor) {
-        // If already registered, update existing donor
         Optional<Donor> existing = donorRepository.findByEmail(donor.getEmail());
         if (existing.isPresent()) {
             Donor existingDonor = existing.get();
@@ -27,16 +26,20 @@ public class DonorService {
             existingDonor.setFoodPreference(donor.getFoodPreference());
             existingDonor.setSmokingStatus(donor.getSmokingStatus());
             existingDonor.setAlcoholConsumption(donor.getAlcoholConsumption());
+            existingDonor.setImageUrl(donor.getImageUrl());
             return donorRepository.save(existingDonor);
         }
         return donorRepository.save(donor);
     }
 
     public List<Donor> getAllDonors() {
-        return donorRepository.findAll();
+        return donorRepository.findByStatusTrue();
     }
 
     public Optional<Donor> getDonorById(Long id) {
         return donorRepository.findById(id);
     }
+
+
+
 }

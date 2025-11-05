@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface AdminService {
     List<Donor> getAllDonors();
+    void deleteDonor(Long id);
+    Donor updateDonorStatus(Long id, boolean status);
     List<Patient> getAllPatients();
+
 }

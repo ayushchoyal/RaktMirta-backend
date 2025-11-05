@@ -25,9 +25,13 @@ public class Donor {
     private String foodPreference;
     private String smokingStatus;
     private String alcoholConsumption;
-
+    private String imageUrl;
     @Column(nullable = false)
     private boolean status = false;  // ✅ default false
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Donor() {}
 
@@ -46,6 +50,7 @@ public class Donor {
         this.smokingStatus = smokingStatus;
         this.alcoholConsumption = alcoholConsumption;
     }
+
 
     // ✅ Getters and Setters
     public Long getId() { return id; }
@@ -86,4 +91,20 @@ public class Donor {
 
     public boolean isStatus() { return status; }
     public void setStatus(boolean status) { this.status = status; }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -4,9 +4,9 @@ package com.raktmitra.RaktMitra.controller;
 import com.raktmitra.RaktMitra.entity.Donor;
 import com.raktmitra.RaktMitra.entity.Patient;
 import com.raktmitra.RaktMitra.services.AdminService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.raktmitra.RaktMitra.services.DonorService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +17,7 @@ import java.util.List;
 }, allowCredentials = "true")
 public class AdminController {
     private final AdminService adminService;
+
 
     public AdminController(AdminService adminService){
         this.adminService=adminService;
@@ -30,5 +31,19 @@ public class AdminController {
     @GetMapping("/admin/patients")
     public List<Patient>getAllPatients(){
         return adminService.getAllPatients();
+    }
+    @DeleteMapping("/admin/donors/{id}")
+    public ResponseEntity<?> deleteDonor(@PathVariable Long id) {
+        adminService.deleteDonor(id);
+        return ResponseEntity.ok("Donor deleted successfully");
+    }
+
+    @PutMapping("/admin/donors/{id}/status")
+    public ResponseEntity<Donor> updateDonorStatus(
+            @PathVariable Long id,
+            @RequestBody Donor donorRequest
+    ) {
+        Donor updatedDonor = adminService.updateDonorStatus(id, donorRequest.isStatus());
+        return ResponseEntity.ok(updatedDonor);
     }
 }

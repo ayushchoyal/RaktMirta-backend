@@ -21,6 +21,16 @@ public class AdminServiceImpl implements AdminService{
         return donorRepository.findAll();
     }
 
+    public void deleteDonor(Long id){
+        donorRepository.deleteById(id);
+    }
+    public Donor updateDonorStatus(Long id, boolean status) {
+        Donor donor = donorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Donor not found with id: " + id));
+        donor.setStatus(status);
+        return donorRepository.save(donor);
+    }
+
     public List<Patient> getAllPatients(){
         return patientRepo.findAll();
     }
