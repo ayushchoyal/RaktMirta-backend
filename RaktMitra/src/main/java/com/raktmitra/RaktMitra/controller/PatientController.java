@@ -35,4 +35,10 @@ public class PatientController {
     public ResponseEntity<List<Patient>> getAllPatients() {
         return ResponseEntity.ok(patientService.getAllPatients());
     }
+
+    @GetMapping("/patient/{id}")
+    public ResponseEntity<Patient>getPatientById(@PathVariable  Long id){
+        return patientService.getPatientById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+
+    }
 }

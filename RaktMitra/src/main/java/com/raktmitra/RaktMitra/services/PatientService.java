@@ -1,5 +1,6 @@
 package com.raktmitra.RaktMitra.services;
 
+import com.raktmitra.RaktMitra.entity.Donor;
 import com.raktmitra.RaktMitra.entity.Patient;
 import com.raktmitra.RaktMitra.repository.PatientRepo;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,8 @@ public class PatientService {
         return patientRepo.findAll();
     }
 
-    public Patient getPatientById(Long id){
-        return patientRepo.findById(id).orElse(null);
+    public Optional<Patient> getPatientById(Long id) {
+        return patientRepo.findById(id);
     }
+
 }
