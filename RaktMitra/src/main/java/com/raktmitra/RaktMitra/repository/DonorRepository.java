@@ -11,4 +11,6 @@ public interface DonorRepository extends JpaRepository<Donor,Long> {
     Optional<Donor> findByEmail(String email);
 
     List<Donor> findByStatusTrue();
+
+    List<Donor> findByStatusTrueOrderByIdDesc();
 }

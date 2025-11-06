@@ -3,6 +3,7 @@ package com.raktmitra.RaktMitra.services;
 import com.raktmitra.RaktMitra.entity.Donor;
 import com.raktmitra.RaktMitra.repository.DonorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class DonorService {
     }
 
     public List<Donor> getAllDonors() {
-        return donorRepository.findByStatusTrue();
+        return donorRepository.findByStatusTrueOrderByIdDesc();
     }
 
     public Optional<Donor> getDonorById(Long id) {

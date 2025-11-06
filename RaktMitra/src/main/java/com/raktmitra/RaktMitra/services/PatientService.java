@@ -27,4 +27,21 @@ public class PatientService {
         return patientRepo.findById(id);
     }
 
+    public Patient registerPatient(Patient patient) {
+        Optional<Patient> existing = patientRepo.findByEmail(patient.getEmail());
+
+        if (existing.isPresent()) {
+            Patient existingPatient = existing.get();
+            existingPatient.setAddress(patient.getAddress());
+            existingPatient.setDob(patient.getDob());
+            existingPatient.setGender(patient.getGender());
+            existingPatient.setBloodGroup(patient.getBloodGroup());
+            existingPatient.setPhone(patient.getPhone());
+
+            existingPatient.setImage(patient.getImage());
+            return patientRepo.save(existingPatient);
+        }
+
+        return patientRepo.save(patient);
+    }
 }

@@ -25,6 +25,7 @@ public class Patient {
     private String dob;
     private String bloodGroup;
     private String gender;
+    private String image;
     @Column(nullable = false)
-    private boolean status = false;
+    private boolean status = true;
 }
