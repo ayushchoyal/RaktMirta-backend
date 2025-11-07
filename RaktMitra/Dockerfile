@@ -9,7 +9,7 @@ WORKDIR /app
 
 # Copy jar file into image
 from eclipse-temurin:17-alpine
-COPY --from-build /target/RaktMitra-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /target/RaktMitra-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose default port (optional)
 EXPOSE 8080
