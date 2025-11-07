@@ -41,6 +41,9 @@ public class DonorService {
         return donorRepository.findById(id);
     }
 
+    public List<Donor> donorSearch(String bloodGroup){
+        return donorRepository.findByBloodGroupIgnoreCaseContaining(bloodGroup);
+    }
 
 
 }

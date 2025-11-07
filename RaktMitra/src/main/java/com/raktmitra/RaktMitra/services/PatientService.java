@@ -44,4 +44,8 @@ public class PatientService {
 
         return patientRepo.save(patient);
     }
+
+    public List<Patient> patientSearch(String bloodGroup) {
+        return patientRepo.findByBloodGroupIgnoreCaseContaining(bloodGroup);
+    }
 }
