@@ -10,5 +10,5 @@ public interface AdminService {
     void deleteDonor(Long id);
     Donor updateDonorStatus(Long id, boolean status);
     List<Patient> getAllPatients();
-
+    void deletePatientById(Long id);
 }

@@ -46,4 +46,7 @@ public class DonorService {
     }
 
 
+    public boolean existsEmail(String email) {
+        return donorRepository.existsByEmail(email);
+    }
 }

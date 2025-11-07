@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import com.raktmitra.RaktMitra.dto.DonorDto;
 import com.raktmitra.RaktMitra.entity.User;
@@ -104,6 +105,12 @@ public class DonorController {
         return donorService.getDonorById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/check-email")
+    public ResponseEntity<?> checkEmail(@RequestParam String email) {
+        boolean exists = donorService.existsEmail(email);
+        return ResponseEntity.ok(Map.of("exists", exists));
     }
 
 

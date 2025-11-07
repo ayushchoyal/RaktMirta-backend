@@ -34,4 +34,9 @@ public class AdminServiceImpl implements AdminService{
     public List<Patient> getAllPatients(){
         return patientRepo.findAll();
     }
+
+    @Override
+    public void deletePatientById(Long id) {
+        donorRepository.deleteById(id);
+    }
 }
