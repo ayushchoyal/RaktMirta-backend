@@ -43,6 +43,8 @@ public class DonorController {
             @RequestParam("email") String email,
             @RequestParam("phone") String phone,
             @RequestParam("address") String address,
+            @RequestParam("city") String city,
+            @RequestParam("state") String state,
             @RequestParam("dob") String dob,
             @RequestParam("weight") Double weight,
             @RequestParam("gender") String gender,
@@ -77,6 +79,8 @@ public class DonorController {
             donor.setEmail(email);
             donor.setPhone(phone);
             donor.setAddress(address);
+            donor.setCity(city);
+            donor.setState(state);
             donor.setDob(LocalDate.parse(dob));
             donor.setWeight(weight);
             donor.setGender(gender);

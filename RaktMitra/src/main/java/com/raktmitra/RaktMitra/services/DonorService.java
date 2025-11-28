@@ -21,6 +21,8 @@ public class DonorService {
         if (existing.isPresent()) {
             Donor existingDonor = existing.get();
             existingDonor.setAddress(donor.getAddress());
+            existingDonor.setCity(donor.getCity());
+            existingDonor.setState(donor.getState());
             existingDonor.setDob(donor.getDob());
             existingDonor.setGender(donor.getGender());
             existingDonor.setWeight(donor.getWeight());
